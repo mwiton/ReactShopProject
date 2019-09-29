@@ -1,13 +1,20 @@
 import React from 'react';
-import { withRouter }from 'react-router-dom'
 
 import './shop-item.styles.scss'
 
-const ShopItem = ({name}) => (
-    <div className='shop-item'>
-        <p>{name}</p>
+const ShopItem = ({name, price, imageUrl}) => (
+    <div className='collection-item'>
+        <div className='image' style={{
+            backgroundImage: `url(${imageUrl})`
+        }}>
+            <button>Add to cart</button>
+        </div>
+        <div className='collection-footer'>
+            <span className='name'>{name}</span>
+            <span className='price'>{price}</span>
+        </div>
     </div>
 );
 
 
-export default withRouter(ShopItem);
+export default ShopItem;
