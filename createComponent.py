@@ -1,23 +1,23 @@
 import sys, os
 
 directory = sys.argv[1]
-componentname = sys.argv[2]
-directory = directory + '/' + componentname
+componentName = sys.argv[2]
+directory = directory + '/' + componentName
 
 os.mkdir(directory)
-file = open(directory+'/'+componentname+'.component.jsx', 'w')
+file = open(directory+'/'+componentName+'.component.jsx', 'w')
 file.write("import React from 'react';\n")
-file.write("import './{}.styles.scss'\n\n".format(componentname))
-file.write("const {} = () => (\n".format(componentname.capitalize()))
-file.write("    <div className='{}'>\n".format(componentname))
+file.write("import './{}.styles.scss'\n\n".format(componentName))
+file.write("const {} = () => (\n".format(componentName.capitalize()))
+file.write("    <div className='{}'>\n".format(componentName))
 file.write("    </div>\n")
 file.write(");\n")
 file.write("\n")
-file.write("export default {};\n".format(componentname.capitalize()))
+file.write("export default {};\n".format(componentName.capitalize()))
 file.close()
 
-cssFile = open(directory+'/'+componentname+'.styles.scss', 'w')
-cssFile.write(".{} {\n".format(componentname))
+cssFile = open(directory+'/'+componentName+'.styles.scss', 'w')
+cssFile.write(".{} {}\n".format(componentName, '{'))
 cssFile.write("\n")
 cssFile.write("}\n")
 cssFile.close()
