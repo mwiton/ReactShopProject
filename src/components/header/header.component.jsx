@@ -6,8 +6,11 @@ import {auth} from "../../firebase/firebase.utils";
 import {ReactComponent as Logo} from "../../assets/crown.svg";
 
 import './header.styles.scss'
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import {changeCartVisibility} from "../../redux/shop/shop.actions";
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser, changeCartVisibility}) => (
     <div className='header'>
         <Link to="/" className='logo-container'>
             <Logo className='Logo'/>
@@ -28,7 +31,11 @@ const Header = ({currentUser}) => (
                     SIGN IN
                 </Link>
             }
+            <div onClick={changeCartVisibility}>
+                <CartIcon/>
+            </div>
         </div>
+        <CartDropdown/>
     </div>
 );
 
@@ -36,4 +43,8 @@ const mapStateToProps = state => ({
      currentUser: state.user.currentUser
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+    changeCartVisibility: () => dispatch(changeCartVisibility())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

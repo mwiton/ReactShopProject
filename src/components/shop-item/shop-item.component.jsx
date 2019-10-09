@@ -1,13 +1,14 @@
 import React from 'react';
 
 import './shop-item.styles.scss'
+import CustomButton from "../custom-button/custom-button.component";
 
 const ShopItem = ({name, price, imageUrl}) => (
     <div className='collection-item'>
         <div className='image' style={{
             backgroundImage: `url(${imageUrl})`
         }}>
-            <button>Add to cart</button>
+            <CustomButton>Add to cart</CustomButton>
         </div>
         <div className='collection-footer'>
             <span className='name'>{name}</span>
