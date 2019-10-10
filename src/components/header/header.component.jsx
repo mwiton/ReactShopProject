@@ -8,9 +8,8 @@ import {ReactComponent as Logo} from "../../assets/crown.svg";
 import './header.styles.scss'
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import {changeCartVisibility} from "../../redux/shop/shop.actions";
 
-const Header = ({currentUser, changeCartVisibility}) => (
+const Header = ({currentUser, cartVisible}) => (
     <div className='header'>
         <Link to="/" className='logo-container'>
             <Logo className='Logo'/>
@@ -31,20 +30,19 @@ const Header = ({currentUser, changeCartVisibility}) => (
                     SIGN IN
                 </Link>
             }
-            <div onClick={changeCartVisibility}>
+            <div>
                 <CartIcon/>
             </div>
         </div>
-        <CartDropdown/>
+        {
+            cartVisible && <CartDropdown/>
+        }
     </div>
 );
 
 const mapStateToProps = state => ({
-     currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    cartVisible: state.shop.cartVisible
 });
 
-const mapDispatchToProps = dispatch => ({
-    changeCartVisibility: () => dispatch(changeCartVisibility())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps)(Header);
