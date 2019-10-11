@@ -4,10 +4,10 @@ import './cart-icon.styles.scss'
 import {changeCartVisibility} from "../../redux/shop/shop.actions";
 import {connect} from "react-redux";
 
-const CartIcon = ({changeCartVisibility}) => (
+const CartIcon = ({changeCartVisibility, cartSize}) => (
     <div onClick={changeCartVisibility} className='cart-icon'>
         <ShoppingIcon className='shopping-icon'/>
-        <span className='item-count'>0</span>
+        <span className='item-count'>{cartSize}</span>
     </div>
 );
 
@@ -15,4 +15,10 @@ const mapDispatchToProps = dispatch => ({
     changeCartVisibility: () => dispatch(changeCartVisibility())
 });
 
-export default connect(null, mapDispatchToProps)(CartIcon);
+const mapStateToProps = state => ({
+    cartSize: state.shop.cartItems.reduce((accumulator, item) => (
+        accumulator + item.count
+    ), 0)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
