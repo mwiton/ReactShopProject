@@ -10,6 +10,8 @@ import Header from "./components/header/header.component";
 import SignInPage from "./pages/sign_in_page/sign_in.component";
 import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 import {setCurrentUser} from './redux/user/user.actions';
+import {currentUserSelector} from "./redux/user/user.selectors";
+import CheckoutPage from "./pages/checkout/checkout.component";
 
 class App extends React.Component {
     unsubscribeFromAuth = () => {};
@@ -47,6 +49,7 @@ class App extends React.Component {
                     <Route path='/shop/:category_name' component={ShopPage}/>
                     <Route path='/signin' exact
                            render={() => this.props.currentUser ? (<Redirect to={'/'}/>) : (<SignInPage />)} />
+                    <Route path='/checkout/' component={CheckoutPage} exact/>
                 </Switch>
             </div>
         );
@@ -54,7 +57,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+    currentUser: currentUserSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
