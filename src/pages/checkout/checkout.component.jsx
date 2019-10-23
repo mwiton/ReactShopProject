@@ -2,7 +2,7 @@ import React from 'react';
 import './checkout.styles.scss'
 import {cartItemsSelector, totalPriceSelector} from "../../redux/shop/shop.selectors";
 import {connect} from "react-redux";
-import ShopItem from "../../components/shop-item/shop-item.component";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 const CheckoutPage = ({cartItems, totalPrice}) => (
     <div className='checkout'>
@@ -25,7 +25,7 @@ const CheckoutPage = ({cartItems, totalPrice}) => (
         </div>
         {
             cartItems.map(item => (
-                <ShopItem key={item.id} item={item}/>
+                <CheckoutItem key={item.id} item={item}/>
             ))
         }
         <span className='total'>Total: {totalPrice}</span>
