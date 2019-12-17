@@ -1,5 +1,5 @@
 import { ShopActionTypes } from "./shop.types";
-import {addItemToCart, changeCartItemCount, deleteItemFromCart} from "./shop.utils";
+import {addItemToCart, deleteItemFromCart} from "./shop.utils";
 
 const INITIAL_STATE = {
     cartVisible: false,
@@ -22,19 +22,19 @@ const shopReducer = (state = INITIAL_STATE, action) => {
     else if (action.type === ShopActionTypes.DELETE_CART_ITEM) {
         return {
             ...state,
-            cartItems: deleteItemFromCart(state.cartItems, action.payload)
+            cartItems: deleteItemFromCart(state.cartItems, action.payload, true)
         }
     }
     else if (action.type === ShopActionTypes.INCREASE_COUNT) {
         return {
             ...state,
-            cartItems: changeCartItemCount(state.cartItems, action.payload, 1)
+            cartItems: addItemToCart(state.cartItems, action.payload)
         }
     }
     else if (action.type === ShopActionTypes.DECREASE_COUNT) {
         return {
             ...state,
-            cartItems: changeCartItemCount(state.cartItems, action.payload, -1)
+            cartItems: deleteItemFromCart(state.cartItems, action.payload, false)
         }
     }
     return state;

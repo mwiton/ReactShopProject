@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 const CheckoutPage = ({cartItems, totalPrice}) => (
-    <div className='checkout'>
+    <div key='Checkout' className='checkout'>
         <div className='checkout-header'>
             <div className='header-block'>
                 <span>Product</span>
@@ -24,9 +24,12 @@ const CheckoutPage = ({cartItems, totalPrice}) => (
             </div>
         </div>
         {
-            cartItems.map(item => (
-                <CheckoutItem key={item.id} item={item}/>
-            ))
+            cartItems.map(item => {
+                console.log('Map item: ' + item.count);
+                return (
+                    <CheckoutItem key={item.id} item={item}/>
+                );
+            })
         }
         <span className='total'>Total: {totalPrice}</span>
     </div>

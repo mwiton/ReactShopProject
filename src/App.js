@@ -12,6 +12,7 @@ import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
 import {setCurrentUser} from './redux/user/user.actions';
 import {currentUserSelector} from "./redux/user/user.selectors";
 import CheckoutPage from "./pages/checkout/checkout.component";
+import {cartItemsSelector} from "./redux/shop/shop.selectors";
 
 class App extends React.Component {
     unsubscribeFromAuth = () => {};
@@ -33,6 +34,7 @@ class App extends React.Component {
                 setCurrentUser(userAuth);
             }
         });
+
     }
 
     componentWillUnmount() {
@@ -57,7 +59,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    currentUser: currentUserSelector(state)
+    currentUser: currentUserSelector(state),
+    cartItems: cartItemsSelector(state)
 });
 
 const mapDispatchToProps = dispatch => ({
